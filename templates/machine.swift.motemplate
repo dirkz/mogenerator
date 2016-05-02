@@ -36,9 +36,9 @@ public protocol I<$sanitizedManagedObjectClassName$> {
 <$if Attribute.hasDefinedAttributeType$>
 <$if Attribute.hasScalarAttributeType$>
 <$if Attribute.isReadonly$>
-    var <$Attribute.name$>: NSNumber? { get }
+    var <$Attribute.name$>: NSNumber<$if Attribute.isOptional$>?<$endif$> { get }
 <$else$>
-    var <$Attribute.name$>: NSNumber? { get set }
+    var <$Attribute.name$>: NSNumber<$if Attribute.isOptional$>?<$endif$> { get set }
 <$endif$>
 <$else$>
 <$if Attribute.isReadonly$>
@@ -92,7 +92,7 @@ public class _<$sanitizedManagedObjectClassName$>: NSManagedObject, I<$sanitized
 <$if Attribute.hasDefinedAttributeType$>
 <$if Attribute.hasScalarAttributeType$>
 <$if Attribute.isReadonly$>
-    public var <$Attribute.name$>: NSNumber?
+    public var <$Attribute.name$>: NSNumber<$if Attribute.isOptional$>?<$endif$>
     {
         self.willAccessValueForKey(<$sanitizedManagedObjectClassName$>Attributes.<$Attribute.name$>.rawValue)
         let <$Attribute.name$> = self.primitiveValueForKey(<$sanitizedManagedObjectClassName$>Attributes.<$Attribute.name$>.rawValue) as? NSNumber
@@ -101,7 +101,7 @@ public class _<$sanitizedManagedObjectClassName$>: NSManagedObject, I<$sanitized
     }
 <$else$>
     @NSManaged public
-    var <$Attribute.name$>: NSNumber?
+    var <$Attribute.name$>: NSNumber<$if Attribute.isOptional$>?<$endif$>
 <$endif$>
 <$else$>
 <$if Attribute.isReadonly$>
