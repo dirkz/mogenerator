@@ -29,11 +29,42 @@ public enum <$sanitizedManagedObjectClassName$>UserInfo: String {<$foreach UserI
 }
 <$endif$>
 
+public protocol I<$sanitizedManagedObjectClassName$> {
+
+    // MARK: - Properties
+<$foreach Attribute noninheritedAttributes do$>
+<$if Attribute.hasDefinedAttributeType$>
+<$if Attribute.hasScalarAttributeType$>
+<$if Attribute.isReadonly$>
+    var <$Attribute.name$>: NSNumber? { get }
+<$else$>
+    var <$Attribute.name$>: NSNumber? { get set }
+<$endif$>
+<$else$>
+<$if Attribute.isReadonly$>
+    var <$Attribute.name$>: <$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$> { get }
+<$else$>
+    var <$Attribute.name$>: <$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$> { get set }
+<$endif$>
+<$endif$>
+<$endif$>
+<$endforeach do$>
+
+    // MARK: - Relationships
+<$foreach Relationship noninheritedRelationships do$>
+<$if Relationship.isToMany$>
+    var <$Relationship.name$>: <$Relationship.immutableCollectionClassName$> { get set }
+
+<$else$>
+    var <$Relationship.name$>: <$Relationship.destinationEntity.sanitizedManagedObjectClassName$><$if Relationship.isOptional$>?<$endif$> { get set }
+<$endif$>
+<$endforeach do$>
+}
 
 <$if hasCustomSuperentity $>
-public class _<$sanitizedManagedObjectClassName$>: <$customSuperentity$> {
+public class _<$sanitizedManagedObjectClassName$>: <$customSuperentity$>, I<$sanitizedManagedObjectClassName$> {
 <$else$>
-public class _<$sanitizedManagedObjectClassName$>: NSManagedObject {
+public class _<$sanitizedManagedObjectClassName$>: NSManagedObject, I<$sanitizedManagedObjectClassName$>{
 <$endif$>
     // MARK: - Class methods
 
