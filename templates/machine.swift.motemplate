@@ -29,7 +29,7 @@ public enum <$sanitizedManagedObjectClassName$>UserInfo: String {<$foreach UserI
 }
 <$endif$>
 
-public protocol I<$sanitizedManagedObjectClassName$> {
+public protocol _I<$sanitizedManagedObjectClassName$> {
 
     // MARK: - Properties
 <$foreach Attribute noninheritedAttributes do$>
@@ -62,7 +62,7 @@ public protocol I<$sanitizedManagedObjectClassName$> {
 }
 
 <$if hasCustomSuperentity $>
-public class _<$sanitizedManagedObjectClassName$>: <$customSuperentity$>, I<$sanitizedManagedObjectClassName$> {
+public class _<$sanitizedManagedObjectClassName$>: <$customSuperentity$>, _I<$sanitizedManagedObjectClassName$> {
 <$else$>
 public class _<$sanitizedManagedObjectClassName$>: NSManagedObject, I<$sanitizedManagedObjectClassName$>{
 <$endif$>
