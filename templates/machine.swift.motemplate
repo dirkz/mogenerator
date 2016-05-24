@@ -203,7 +203,7 @@ public class _<$sanitizedManagedObjectClassName$>: NSManagedObject, I<$sanitized
 }
 
 <$foreach Relationship noninheritedRelationships do$><$if Relationship.isToMany$>
-extension _<$sanitizedManagedObjectClassName$> {
+public extension _<$sanitizedManagedObjectClassName$> {
 
     func add<$Relationship.name.initialCapitalString$>(objects: <$Relationship.immutableCollectionClassName$>) {
         let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutable<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
